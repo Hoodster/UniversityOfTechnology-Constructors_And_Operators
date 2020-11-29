@@ -11,7 +11,7 @@ class Napis {
     public:
         Napis() = default;
 
-        Napis(const char *text) {
+        explicit  Napis(const char *text) {
             int length = std::strlen(text);
             this->_array = new char[length];
             std:strcpy(this->_array, text);
@@ -27,7 +27,7 @@ class Napis {
         }
 
         ~Napis() {
-            delete[] _array;
+            delete _array;
         }
 
         Napis & operator =(Napis const & src) = default;
@@ -36,7 +36,6 @@ class Napis {
             int destLength = this->getTextLength();
             int srcLength = src.getTextLength();
             int newSum = (destLength + srcLength);
-            realloc(this->_array, sizeof(char) * newSum);
             for(int i = destLength; i < newSum; i++) {
                 this->_array[i] = src._array[i - destLength];
             }
